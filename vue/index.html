@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div id="app">
+        <button v-on:click="doAdd">プラス</button>
+        <ul>
+            <li v-for="item in list">
+            No.{{ item.number }} 
+            </li>
+        </ul>
+    </div>
+
+    <!-- Vue.js読み込み -->
+    <script src="https://cdn.jsdelivr.net/vue/latest/vue.js"></script>
+    <script>
+        new Vue({
+        el: '#app',
+        data: {
+            list: [
+            { number: 1 },
+            ]
+        },
+        methods: {
+            // ボタンをクリックしたときのハンドラ
+            doAdd: function () {
+            // リスト内で1番大きいNoを取得
+            var max = this.list.reduce(function (a, b) {
+                return a > b.number ? a : b.number
+            }, 0)
+            // ナンバーをリストに追加
+            this.list.push({
+                number: max + 1
+            })
+            }
+        }
+        })
+    </script>
+</body>
+</html>
